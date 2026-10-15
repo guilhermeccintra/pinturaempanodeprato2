@@ -5110,7 +5110,7 @@ clamp(
 
     overflow:hidden;
 
-    background:var(--color-white);
+    background: var(--color-bg);
 
 }
 
