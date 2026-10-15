@@ -575,151 +575,112 @@ document.addEventListener(
 
 /* ==========================================================
    ANIMAÇÕES DE ENTRADA
+   Com fallback de segurança
 ========================================================== */
 
+document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+    const elementos = document.querySelectorAll(".fade-in");
 
-
-        const elementos =
-            document.querySelectorAll(
-                ".fade-in"
-            );
-
-
-        if(!elementos.length){
-
-            return;
-
-        }
-
-
-
-        const reduzirMovimento =
-            window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            )
-            .matches;
-
-
-
-        if(reduzirMovimento){
-
-
-            elementos.forEach(
-                function(element){
-
-
-                    element.classList.add(
-                        "visible"
-                    );
-
-
-                }
-            );
-
-
-            return;
-
-
-        }
-
-
-
-
-        /*
-         * Fallback para navegadores antigos.
-         */
-
-        if(
-            !("IntersectionObserver" in window)
-        ){
-
-
-            elementos.forEach(
-                function(element){
-
-
-                    element.classList.add(
-                        "visible"
-                    );
-
-
-                }
-            );
-
-
-            return;
-
-        }
-
-
-
-
-
-        const observer =
-            new IntersectionObserver(
-                function(entries, observer){
-
-
-                    entries.forEach(
-                        function(entry){
-
-
-                            if(
-                                entry.isIntersecting
-                            ){
-
-
-                                entry.target.classList.add(
-                                    "visible"
-                                );
-
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-
-                            }
-
-
-                        }
-                    );
-
-
-                },
-                {
-                    threshold:0.1,
-
-                    rootMargin:
-                        "0px 0px -50px 0px"
-                }
-            );
-
-
-
-
-
-        elementos.forEach(
-            function(element){
-
-
-                observer.observe(
-                    element
-                );
-
-
-            }
-        );
-
-
-
+    if (!elementos.length) {
+        return;
     }
-);
 
+    const reduzirMovimento = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    /*
+     * Sem animação quando o usuário prefere
+     * movimento reduzido.
+     */
+    if (reduzirMovimento) {
+
+        elementos.forEach(function (elemento) {
+            elemento.classList.add("visible");
+        });
+
+        return;
+    }
+
+
+    /*
+     * Fallback para navegadores sem
+     * IntersectionObserver.
+     */
+    if (!("IntersectionObserver" in window)) {
+
+        elementos.forEach(function (elemento) {
+            elemento.classList.add("visible");
+        });
+
+        return;
+    }
+
+
+    const observer = new IntersectionObserver(
+        function (entries, observerInstance) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                    observerInstance.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.05,
+            rootMargin: "0px 0px -20px 0px"
+        }
+    );
+
+
+    elementos.forEach(function (elemento) {
+        observer.observe(elemento);
+    });
+
+
+    /*
+     * FALLBACK DE SEGURANÇA
+     *
+     * Se por qualquer motivo o observer não atualizar
+     * corretamente durante o carregamento, garantimos
+     * que nenhuma seção permaneça invisível.
+     */
+    window.addEventListener(
+        "load",
+        function () {
+
+            setTimeout(function () {
+
+                elementos.forEach(function (elemento) {
+
+                    const rect =
+                        elemento.getBoundingClientRect();
+
+                    if (
+                        rect.top < window.innerHeight * 1.25
+                    ) {
+                        elemento.classList.add("visible");
+                    }
+
+                });
+
+            }, 300);
+
+        },
+        { once: true }
+    );
+
+});
 
 
 
@@ -965,43 +926,6 @@ document.addEventListener(
 
         }
 
-
-       
-         /*
-         * BARRA TOPO
-         */
-
-       function atualizarDataPromocao() {
-    const elemento = document.getElementById("promo-date");
-
-    if (!elemento) return;
-
-    const hoje = new Date();
-
-    const dia = String(hoje.getDate()).padStart(2, "0");
-
-    const meses = [
-        "JANEIRO",
-        "FEVEREIRO",
-        "MARÇO",
-        "ABRIL",
-        "MAIO",
-        "JUNHO",
-        "JULHO",
-        "AGOSTO",
-        "SETEMBRO",
-        "OUTUBRO",
-        "NOVEMBRO",
-        "DEZEMBRO"
-    ];
-
-    const mes = meses[hoje.getMonth()];
-    const ano = hoje.getFullYear();
-
-    elemento.textContent = `${dia} DE ${mes} DE ${ano}!`;
-}
-
-atualizarDataPromocao();
 
 
 
@@ -1264,104 +1188,155 @@ atualizarDataPromocao();
 );
 
 /* ==========================================================
-   TRACKING — CHECKOUT DIRETO
+   TRACKING — CLIQUES PARA CHECKOUT
 
-   Substitui:
-   - OFERTA SURPRESA — ENVELOPES
-   - POPUP DE DESCONTO
-   - REVELAÇÃO DE OFERTA
-
-   Agora:
-   CTA → Checkout direto Hotmart
-   Tracking → clique real no botão
+   Cada CTA de checkout deve possuir:
+   data-checkout-button
+   data-checkout-position="..."
 ========================================================== */
-
 
 document.addEventListener(
     "DOMContentLoaded",
-    function(){
-
+    function () {
 
         const checkoutButtons =
             document.querySelectorAll(
-                ".btn-primary"
+                "[data-checkout-button]"
             );
 
 
-
-        if(!checkoutButtons.length){
-
+        if (!checkoutButtons.length) {
             return;
-
         }
 
 
-
-
         checkoutButtons.forEach(
-            function(button){
-
+            function (button) {
 
                 button.addEventListener(
                     "click",
-                    function(){
+                    function () {
+
+                        const position =
+                            button.getAttribute(
+                                "data-checkout-position"
+                            ) || "unknown";
 
 
                         /*
-                         * GOOGLE ADS — CONVERSÃO
-                         * Dispara no clique do CTA.
+                         * MICROSOFT CLARITY
                          *
-                         * InitiateCheckout (Meta) e
-                         * begin_checkout (GA4) são
-                         * enviados pela Hotmart ao
-                         * chegar no checkout.
+                         * Evento personalizado para localizar
+                         * sessões em que houve clique no checkout.
                          */
 
-                        if(
-                            typeof gtag === "function"
-                        ){
+                        if (
+                            typeof clarity === "function"
+                        ) {
 
-
-                            gtag(
-
+                            clarity(
                                 "event",
-
-                                "conversion",
-
-                                {
-
-                                    'send_to':
-                                        'AW-18379872794/tOsJCOvXo98cEJq0mrxE',
-
-                                    'value':
-                                        27.90,
-
-                                    'currency':
-                                        'BRL'
-
-                                }
-
+                                "checkout_click_" + position
                             );
-
 
                         }
 
 
+                        /*
+                         * GOOGLE ANALYTICS 4
+                         *
+                         * Evento próprio para medir intenção
+                         * real de ida ao checkout.
+                         */
+
+                        if (
+                            typeof gtag === "function"
+                        ) {
+
+                            gtag(
+                                "event",
+                                "checkout_click",
+                                {
+                                    checkout_position: position,
+                                    value: 37.90,
+                                    currency: "BRL"
+                                }
+                            );
+
+
+                            /*
+                             * GOOGLE ADS — CONVERSÃO
+                             */
+
+                            gtag(
+                                "event",
+                                "conversion",
+                                {
+                                    send_to:
+                                        "AW-18379872794/tOsJCOvXo98cEJq0mrxE",
+
+                                    value: 37.90,
+                                    currency: "BRL"
+                                }
+                            );
+
+                        }
+
                     }
                 );
 
-
             }
         );
-
-
 
     }
 );
 
 
+// ==========================================================
+// DATA DINÂMICA DA BARRA DE OFERTA + BLOCO DE PREÇO
+// ==========================================================
+
+function atualizarOferta() {
+
+    const hoje = new Date();
+
+    const dia = String(hoje.getDate()).padStart(2, '0');
+
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+
+    const ano = hoje.getFullYear();
 
 
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+
+
+    // BARRA SUPERIOR
+    const elemento = document.getElementById('promo-date');
+
+
+    if (elemento) {
+
+        elemento.textContent =
+        `OFERTA ESPECIAL DISPONÍVEL APENAS HOJE ${dataFormatada}`;
+
+    }
+
+
+    // DATA NO BLOCO DA OFERTA
+    const elementoOferta = document.getElementById('offer-date');
+
+
+    if (elementoOferta) {
+
+        elementoOferta.textContent = dataFormatada;
+
+    }
+
+}
+
+
+// EXECUTA AO CARREGAR A PÁGINA
+atualizarOferta();
 
 /* ==========================================================
    FIM DO SCRIPT.JS
