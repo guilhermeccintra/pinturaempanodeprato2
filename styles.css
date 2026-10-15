@@ -7368,6 +7368,70 @@ body {
 }
 
 
+/* ==========================================================
+   PROVA SOCIAL DO HERO — ESTRELAS | DIVISOR | AVATARES + TEXTO
+========================================================== */
+
+.hero-social-proof-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 540px;
+  margin: 18px auto 0;
+  padding: 0;
+}
+
+.hero-social-proof-stars .stars {
+  color: #C4784A;
+  font-size: 16px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.hero-social-proof-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(196, 120, 74, 0.45);
+}
+
+.hero-social-proof-avatars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-social-proof-avatars .hero-collection-proof__avatars {
+  padding-left: 0;
+}
+
+.hero-social-proof-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.hero-social-proof-text strong {
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .hero-social-proof-row {
+    gap: 8px;
+  }
+  .hero-social-proof-stars .stars {
+    font-size: 13px;
+  }
+  .hero-social-proof-text {
+    font-size: 12px;
+  }
+  .hero-social-proof-divider {
+    height: 22px;
+  }
+}
+
+
 /* ==========================================================================
    FIM DO STYLES.CSS LIMPO
    ========================================================================== */
