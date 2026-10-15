@@ -7334,6 +7334,40 @@ body {
 
 
 
+/* ==========================================================
+   BOTÕES COM TAMANHO FIXO — MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .btn-primary,
+  .btn-primary.btn-large,
+  .hero-buttons .btn-primary,
+  .offer-box .btn-primary {
+    width: 100% !important;
+    max-width: 360px !important;
+    min-width: 0 !important;
+    height: 64px !important;
+    min-height: 64px !important;
+    padding: 0 16px !important;
+    margin: 0 auto;
+    font-size: 16px !important;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
 /* ==========================================================================
    FIM DO STYLES.CSS LIMPO
    ========================================================================== */
