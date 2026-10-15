@@ -7327,6 +7327,13 @@ body {
 }
 
 
+.promo-date-highlight {
+  color: #F8BC5B; /* troque por qualquer cor que quiser */
+  font-weight: 900;
+}
+
+
+
 /* ==========================================================================
    FIM DO STYLES.CSS LIMPO
    ========================================================================== */
