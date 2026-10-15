@@ -5217,9 +5217,8 @@ clamp(
 
 .testimonial-slide {
 
-    flex:0 0 210px;
-
-    width:210px;
+    flex: 0 0 240px;
+    width: 240px;
 
     margin:0;
 
@@ -5356,9 +5355,8 @@ clamp(
 
     .testimonial-slide {
 
-        flex-basis:180px;
-
-        width:180px;
+        flex-basis: 205px;
+        width: 205px;
 
     }
 
@@ -5408,10 +5406,8 @@ clamp(
     .testimonial-slide {
 
 
-        flex:0 0 155px;
-
-
-        width:155px;
+        flex: 0 0 180px;
+        width: 180px;
 
 
         border-radius:14px;
@@ -5454,9 +5450,8 @@ clamp(
     .testimonial-slide {
 
 
-        flex-basis:145px;
-
-        width:145px;
+        flex-basis: 165px;
+        width: 165px;
 
     }
 
