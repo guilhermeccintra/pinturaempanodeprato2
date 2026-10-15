@@ -2544,7 +2544,7 @@ section {
 
     .hero-method {
 
-        margin:12px auto 0;
+        margin:0 auto 15px;
 
         padding:0 8px;
 
@@ -7308,9 +7308,10 @@ body {
 
     .hero-final__title {
         width: 100%;
-
+        font-weight: 700;
         font-size: 1.55rem;
-        line-height: 1.3;
+        line-height: 1;
+        margin: 0 auto 12px;
     }
 
     .hero-final__text {
