@@ -1316,8 +1316,7 @@ function atualizarOferta() {
 
     if (elemento) {
 
-        elemento.textContent =
-        `OFERTA ESPECIAL DISPONÍVEL APENAS HOJE ${dataFormatada}`;
+    elemento.textContent = dataFormatada;
 
     }
 
