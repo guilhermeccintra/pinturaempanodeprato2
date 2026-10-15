@@ -797,7 +797,7 @@ section {
   width: 100%;
   max-width: 620px;
 
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
 }
 
 .comparison-viewport {
@@ -2503,7 +2503,7 @@ section {
 
     max-width:720px;
 
-    margin:0 auto 16px;
+    margin:0 auto 20px;
 
     text-align:center;
 
@@ -2512,7 +2512,6 @@ section {
 
 .hero-method p {
 
-    margin:0 auto;
     font-size: 18px;
     max-width:680px;
 
