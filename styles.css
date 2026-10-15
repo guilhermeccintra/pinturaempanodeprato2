@@ -797,7 +797,7 @@ section {
   width: 100%;
   max-width: 620px;
 
-  margin: 0 auto 20px;
+  margin: 15px auto 15px;
 }
 
 .comparison-viewport {
@@ -1046,6 +1046,7 @@ section {
 
 .comparison-carousel {
   position: relative;
+  margin: 20px auto 20px;
 }
 
 .comparison-button {
@@ -1099,7 +1100,7 @@ section {
 
   .comparison-carousel {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 15px auto 15px;
   }
 
   .comparison-before {
@@ -1122,6 +1123,7 @@ section {
   .comparison-carousel {
     width: 100%;
     max-width: 100%;
+    margin: 15px auto 15px;
   }
 
   .comparison-card {
@@ -2503,7 +2505,7 @@ section {
 
     max-width:720px;
 
-    margin:0 auto 20px;
+    margin:0 auto 0;
 
     text-align:center;
 
@@ -2544,7 +2546,7 @@ section {
 
     .hero-method {
 
-        margin:0 auto 15px;
+        margin:0 auto 0;
 
         padding:0 8px;
 
