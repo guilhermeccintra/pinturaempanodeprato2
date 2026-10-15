@@ -5768,7 +5768,7 @@ html {
 
     font-family:var(--font-body);
 
-    font-size:12px;
+    font-size:16px;
 
     font-weight:700;
 
@@ -5802,7 +5802,7 @@ html {
 
     .promo-message {
 
-        font-size:10.5px;
+        font-size:12px;
 
         line-height:1.25;
 
@@ -7328,7 +7328,7 @@ body {
 
 
 .promo-date-highlight {
-  color: #F8BC5B; /* troque por qualquer cor que quiser */
+  color: #e9f721; /* troque por qualquer cor que quiser */
   font-weight: 900;
 }
 
