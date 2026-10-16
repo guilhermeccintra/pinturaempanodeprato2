@@ -7435,6 +7435,66 @@ body {
 }
 
 
+/* ==========================================================
+   FECHAMENTO FINAL — ESTRUTURA DE CHECKOUT
+========================================================== */
+
+.final-offer-close__security {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.final-offer-close__divider {
+  width: 100%;
+  height: 1px;
+  margin: 26px 0 22px;
+  background: rgba(196, 120, 74, 0.18);
+}
+
+.final-offer-close__list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 480px;
+  text-align: left;
+  display: grid;
+  gap: 12px;
+}
+
+.final-offer-close__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--color-text);
+}
+
+.final-offer-close__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .final-offer-close__list li {
+    font-size: 15px;
+  }
+}
+
+
+
 /* ==========================================================================
    FIM DO STYLES.CSS LIMPO
    ========================================================================== */
